@@ -1,17 +1,28 @@
 package com.tgt.rysetii.learningresourcesapi.entity;
 
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Component
+@Table(name = "learningresource")
 public class LearningResource {
 
+    @Id
     private int resourceId;
     private String resourceName;
     private double costPrice;
     private double sellingPrice;
+    @Enumerated(EnumType.STRING)
     private LearningResourceStatus productStatus;
     private LocalDate createdDate;
     private LocalDate publishedDate;
     private LocalDate retiredDate;
+
+    public LearningResource() {
+    }
 
     public LearningResource(int resourceId, String resourceName, double costPrice, double sellingPrice, LearningResourceStatus productStatus, LocalDate createdDate, LocalDate publishedDate, LocalDate retiredDate) {
         this.resourceId = resourceId;
