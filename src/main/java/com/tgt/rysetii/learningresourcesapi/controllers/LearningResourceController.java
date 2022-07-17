@@ -26,7 +26,7 @@ public class LearningResourceController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createAccount(@RequestBody List<LearningResource> lrList)
+    public String createResource(@RequestBody List<LearningResource> lrList)
     {
         for(LearningResource lr:lrList) {
             if (repo.existsById(lr.getResourceId()))
@@ -39,7 +39,7 @@ public class LearningResourceController {
         return "Successfully created";
     }
     @DeleteMapping("/learningresource/{resourceId}")
-    public String deleteAccount(@PathVariable int resourceId)
+    public String deleteResource(@PathVariable int resourceId)
     {
         if(repo.existsById(resourceId))
         {
