@@ -21,12 +21,13 @@ public class LearningResourceService {
     public List<LearningResource> getLearningResources(){
         return repo.findAll();
     }
-    public void saveLearningResources(List<LearningResource> learningResource1)
+    public void saveLearningResources(LearningResource learningResource1)
     {
-        for(LearningResource l1:learningResource1)
-        {
-            repo.save(l1);
-        }
+            repo.save(learningResource1);
+
+    }
+    public void deleteLearningResourcesById(int resourceId){
+            repo.deleteById(resourceId);
     }
     public static double getProfit(LearningResource lr){
        double profitMargin=(lr.getSellingPrice()-lr.getCostPrice())/lr.getSellingPrice();
