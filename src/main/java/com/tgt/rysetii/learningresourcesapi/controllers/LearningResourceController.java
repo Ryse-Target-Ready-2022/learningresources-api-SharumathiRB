@@ -14,41 +14,25 @@ import java.util.List;
 public class LearningResourceController {
 
     @Autowired
-    private LearningResourceRepository repo;
+    private LearningResourceRepository learningResourceRepository;
     @Autowired
-    private LearningResourceService lrs;
+    private LearningResourceService learningResourceService;
 
     @GetMapping("/")
     public List<LearningResource> getResources(){
 
-        return lrs.getLearningResources();
+        return learningResourceService.getLearningResources();
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createResource(@RequestBody List<LearningResource> lrList)
+    public String createResource(@RequestBody List<LearningResource> learningResourceList)
     {
-        for(LearningResource lr:lrList) {
-            if (repo.existsById(lr.getResourceId()))
-                return "Sorry ! Resource already exist";
-            else {
-                lrs.saveLearningResources(lr);
-
-            }
-        }
-        return "Successfully created";
+            return learningResourceService.saveLearningResources(learningResourceList);
     }
     @DeleteMapping("/learningresource/{resourceId}")
-    public String deleteResource(@PathVariable int resourceId)
-    {
-        if(repo.existsById(resourceId))
-        {
-            lrs.deleteLearningResourcesById(resourceId);
-            return "deleted successfully";
-        }
-        else
-            return "Sorry ! Invalid resourceId";
+    public String deleteResource(@PathVariable int resourceId) {
 
+           return learningResourceService.deleteLearningResourcesById(resourceId);
     }
-
 }
