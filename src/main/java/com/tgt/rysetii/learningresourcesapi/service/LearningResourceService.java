@@ -1,17 +1,13 @@
 package com.tgt.rysetii.learningresourcesapi.service;
 
 import com.tgt.rysetii.learningresourcesapi.entity.LearningResource;
-import com.tgt.rysetii.learningresourcesapi.entity.LearningResourceStatus;
 import com.tgt.rysetii.learningresourcesapi.repository.LearningResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.*;
-import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
+
 @Component
 public class LearningResourceService {
 
@@ -48,16 +44,13 @@ public class LearningResourceService {
        double profitMargin=(lr.getSellingPrice()-lr.getCostPrice())/lr.getSellingPrice();
        return profitMargin;
     }
-    public LinkedHashMap getProfitMargin()
+    public Map<Integer, Double> getProfitMargin()
     {
         List<LearningResource> learningResourceList=getLearningResources();
         double profitMargin;
-        LinkedHashMap LearningRespm=new LinkedHashMap();
-        for(LearningResource lr:learningResourceList){
-            profitMargin=getProfit(lr);
-            LearningRespm.put(lr.getResourceId(),profitMargin);
-        }
-        return LearningRespm;
+        Map<Integer, Double> LearningResourceMap=new LinkedHashMap<>();
+       LearningResourceMap= learningResourceList.stream().collect(Collectors.toMap(LearningResource::getResourceId,LearningResourceService::getProfit));
+        return LearningResourceMap;
     }
     public List<LearningResource> sortLearningResoucesByProfitMargin(){
         List<LearningResource> lr=getLearningResources();
