@@ -16,18 +16,33 @@ import java.util.*;
 public class LearningResourceService {
 
     @Autowired
-    LearningResourceRepository repo;
+    LearningResourceRepository learningResourceRepository;
 
     public List<LearningResource> getLearningResources(){
-        return repo.findAll();
+        return learningResourceRepository.findAll();
     }
-    public void saveLearningResources(LearningResource learningResource1)
+    public String saveLearningResources(List<LearningResource> learningResourceList)
     {
-            repo.save(learningResource1);
+        for(LearningResource lr:learningResourceList) {
+            if (learningResourceRepository.existsById(lr.getResourceId()))
+                return "Sorry ! Resource already exist";
+            else {
+                learningResourceRepository.save(lr);
+
+            }
+        }
+        return "Successfully created";
 
     }
-    public void deleteLearningResourcesById(int resourceId){
-            repo.deleteById(resourceId);
+    public String deleteLearningResourcesById(int resourceId){
+        if(learningResourceRepository.existsById(resourceId))
+        {
+            learningResourceRepository.deleteById(resourceId);
+            return "deleted successfully";
+        }
+        else
+            return "Sorry ! Invalid resourceId";
+
     }
     public static double getProfit(LearningResource lr){
        double profitMargin=(lr.getSellingPrice()-lr.getCostPrice())/lr.getSellingPrice();
