@@ -31,13 +31,8 @@ public class LearningResourceService {
 
     }
     public String deleteLearningResourcesById(int resourceId){
-        if(learningResourceRepository.existsById(resourceId))
-        {
             learningResourceRepository.deleteById(resourceId);
             return "deleted successfully";
-        }
-        else
-            return "Sorry ! Invalid resourceId";
 
     }
     public static double getProfit(LearningResource lr){
