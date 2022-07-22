@@ -56,18 +56,10 @@ public class LearningResourceServiceTests {
     }
     @Test
     public void sortTheLearningResourceBasedOnProfitMarginInNonIncreasingOrder(){
-        List<LearningResource> learningResources = new ArrayList<>();
-        LearningResource learningResource1 = new LearningResource(1311, "Test Name 1", 100.0, 120.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(5), LocalDate.now().plusYears(2));
-        LearningResource learningResource2 = new LearningResource(1312, "Test Name 2", 120.0, 180.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(6), LocalDate.now().plusYears(3));
-        learningResources.add(learningResource1);
-        learningResources.add(learningResource2);
-
+        List<LearningResource> learningResources = new ArrayList<>(Arrays.asList(learningResource1,learningResource2));
         Collections.sort(learningResources,new Sorters());
-
         when(learningResourceRepository.findAll()).thenReturn(learningResources);
-
         List<LearningResource> learningResourcesSorted = learningResourceService.sortLearningResoucesByProfitMargin();
-
         assertEquals(learningResources, learningResourcesSorted, "The learning resources are not sorted by profit margin");
     }
 
