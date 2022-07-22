@@ -4,11 +4,13 @@ import com.tgt.rysetii.learningresourcesapi.entity.LearningResource;
 import com.tgt.rysetii.learningresourcesapi.repository.LearningResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
+@Service
 public class LearningResourceService {
 
     @Autowired
