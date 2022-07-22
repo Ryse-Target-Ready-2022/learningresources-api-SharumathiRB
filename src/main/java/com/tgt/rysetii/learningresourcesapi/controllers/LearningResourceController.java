@@ -13,9 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/learningresources/v1")
 public class LearningResourceController {
-
-    @Autowired
-    private LearningResourceRepository learningResourceRepository;
     @Autowired
     private LearningResourceService learningResourceService;
 
