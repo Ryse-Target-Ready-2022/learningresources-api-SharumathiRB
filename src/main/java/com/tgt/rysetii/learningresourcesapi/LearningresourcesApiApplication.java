@@ -19,9 +19,6 @@ public class LearningresourcesApiApplication {
 
 		ApplicationContext ctx= SpringApplication.run(LearningresourcesApiApplication.class, args);
 
-		LearningResourceService lls=ctx.getBean(LearningResourceService.class);
-		System.out.println(lls.getProfitMargin());
-
 	}
 
 }

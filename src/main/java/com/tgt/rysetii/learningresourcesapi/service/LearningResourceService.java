@@ -43,7 +43,9 @@ public class LearningResourceService {
     {
         List<LearningResource> learningResourceList=getLearningResources();
         Map<Integer, Double> LearningResourceMap=new LinkedHashMap<>();
+        System.out.println(learningResourceList.stream());
        LearningResourceMap= learningResourceList.stream().collect(Collectors.toMap(LearningResource::getResourceId,LearningResourceService::getProfit));
+       System.out.println(LearningResourceMap);
         return LearningResourceMap;
     }
     public List<LearningResource> sortLearningResoucesByProfitMargin(){
